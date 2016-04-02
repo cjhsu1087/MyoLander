@@ -1,7 +1,5 @@
-var Myo = require('myo');
 
 KeyTracker = new (function(){
-	
 	this.keysPressed = {}; 
 	this.UP = 38; 
 	this.LEFT = 37; 
@@ -15,6 +13,8 @@ KeyTracker = new (function(){
 		return(this.keysPressed[key]);
 	};
 	
+
+
 	document.addEventListener("keydown", function(e) {	
 		
 		KeyTracker.keysPressed[e.keyCode] = true; 

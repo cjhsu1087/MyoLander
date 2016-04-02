@@ -8,3 +8,5 @@ Myo.on('fist', function(){
 	console.log('Hello Myo!');
 	this.vibrate();
 });
+
+Myo.connect();
