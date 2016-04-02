@@ -1,3 +1,5 @@
+var Myo = require('myo');
+
 KeyTracker = new (function(){
 	
 	this.keysPressed = {}; 

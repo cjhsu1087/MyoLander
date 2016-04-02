@@ -1,7 +1,8 @@
 var Myo = require('myo');
 
-//Start talking with Myo Connect
-Myo.connect('com.stolksdorf.myAwesomeApp');
+Myo.on('connected', function(){
+  console.log('connected!', this.id)
+});
 
 Myo.on('fist', function(){
 	console.log('Hello Myo!');
