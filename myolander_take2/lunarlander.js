@@ -10,6 +10,9 @@
  * Shim layer, polyfill, for requestAnimationFrame with setTimeout fallback.
  * http://paulirish.com/2011/requestanimationframe-for-smart-animating/
  */ 
+
+Myo.connect('com.cjhsu.myolander');
+
 window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame       || 
 		  window.webkitRequestAnimationFrame || 
@@ -66,7 +69,6 @@ var mod = function (n, m) {
     return Math.floor(remain >= 0 ? remain : remain + m);
 };
 
-var myo = Myo.create();
 /**
  * Keyboard events
  */
@@ -88,10 +90,46 @@ var Key = {
   
 	onKeyup: function(event) {
 		delete this._pressed[event.keyCode];
+	},
+
+	onGestureStart: function(event) {
+		this._pressed[event] = true;
+	},
+
+	onGestureEnd: function(event) {
+		delete this._pressed[event];
 	}
 };
 
+Myo.on('pose', function(pose_name) {
+	console.log(pose_name);
+	if (pose_name === 'fingers_spread') {
+		Key.onGestureStart(38);
+	}
+	else if (pose_name === 'wave_in') {
+		Key.onGestureStart(37);
+	}
+	else if (pose_name === 'wave_out') {
+		Key.onGestureStart(39);
+	}
 
+});
+
+Myo.on('pose_off', function(pose_name) {
+	console.log(pose_name);
+	if (pose_name === 'fingers_spread') {
+		Key.onGestureEnd(38);
+		throttleSound.pause();
+	}
+	else if (pose_name === 'wave_in') {
+		Key.onGestureEnd(37);
+		throttleSound.pause();
+	}
+	else if (pose_name === 'wave_out') {
+		Key.onGestureEnd(39);
+		throttleSound.pause();
+	}
+});
 
 
 window.addEventListener('keyup', function(event) { 
