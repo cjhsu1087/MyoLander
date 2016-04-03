@@ -529,7 +529,7 @@ function updateTextInfo() {
 }
 
 function showStartMessage() {
-	infoDisplay.showGameInfo("INSERT COINS<br><br>CLICK TO PLAY<br>ARROW KEYS TO MOVE");
+	infoDisplay.showGameInfo("MYOLANDER<br><br>WAVE LEFT AND RIGHT TO MOVE<br>OPEN FINGERS FOR PROPULSION<br><br>BUILT BY:<br>CHRIS HSU<br>CINDY LIU<br>SEJIN PARK<br>& SURIN AHN<br>BUILT UPON CODE WRITTEN BY SEB LEE-DELISLE<br>@ HACKPRINCETON SPRING 2016");
 }
 
 function setZoom(zoom ) 
