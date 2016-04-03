@@ -1,3 +1,4 @@
+Myo.connect('com.cjhsu.myolander');
 
 KeyTracker = new (function(){
 	this.keysPressed = {}; 
@@ -13,13 +14,37 @@ KeyTracker = new (function(){
 		return(this.keysPressed[key]);
 	};
 	
+	Myo.on('pose', function(pose_name) {
+	console.log(pose_name);
+	if (pose_name === 'fingers_spread') {
+		KeyTracker.keysPressed[38] = true;
+	}
+	else if (pose_name === 'wave_in') {
+		KeyTracker.keysPressed[37] = true;
+	}
+	else if (pose_name === 'wave_out') {
+		KeyTracker.keysPressed[39] = true;
+	}
+
+	});
+
+	Myo.on('pose_off', function(pose_name) {
+	console.log(pose_name);
+	if (pose_name === 'fingers_spread') {
+		KeyTracker.keysPressed[38] = false;
+	}
+	else if (pose_name === 'wave_in') {
+		KeyTracker.keysPressed[37] = false; 
+	}
+	else if (pose_name === 'wave_out') {
+		KeyTracker.keysPressed[39] = false; 
+	}
+	});
 
 
-	document.addEventListener("keydown", function(e) {	
-		
-		KeyTracker.keysPressed[e.keyCode] = true; 
-		
-		}); 
+	document.addEventListener("keydown", function(e) {		
+		KeyTracker.keysPressed[e.keyCode] = true; }); 
+
 	document.addEventListener("keyup", 	function(e) {
 		KeyTracker.keysPressed[e.keyCode] = false;}); 
 		
